@@ -19,6 +19,9 @@ function App() {
   const [refreshHistory, setRefreshHistory] = useState(0); // Trigger sidebar update
   const messagesEndRef = useRef(null);
 
+  // Mobile State
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     if (userId) {
       // Initial load? Maybe select latest session or start new?
@@ -49,6 +52,7 @@ function App() {
   // Load specific session
   const handleSelectSession = async (sessionId) => {
     setCurrentSessionId(sessionId);
+    setIsMobileMenuOpen(false); // Close mobile drawer on selection
     if (!sessionId) {
       // New Chat
       setMessages([{ role: 'model', content: `Ready for a new task, ${username}.` }]);
@@ -122,10 +126,10 @@ function App() {
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none"></div>
 
       {/* Floating Glass Container */}
-      <div className="relative z-10 w-full h-full flex items-center justify-center p-4 md:p-8">
-        <div className="w-full max-w-7xl h-full bg-black/40 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl flex overflow-hidden">
+      <div className="relative z-10 w-full h-full flex items-center justify-center md:p-8">
+        <div className="w-full max-w-7xl h-full bg-black/40 border-0 md:border md:border-white/10 md:rounded-3xl backdrop-blur-xl shadow-2xl flex overflow-hidden">
 
-          {/* HISTORY SIDEBAR (LEFT) */}
+          {/* HISTORY SIDEBAR (DESKTOP) */}
           <div className="hidden md:block w-72 border-r border-white/5 bg-black/20">
             <ChatHistoryPanel
               userId={userId}
@@ -135,17 +139,43 @@ function App() {
             />
           </div>
 
+          {/* HISTORY SIDEBAR (MOBILE OVERLAY) */}
+          {isMobileMenuOpen && (
+            <div className="absolute inset-0 z-50 bg-black/80 backdrop-blur-md md:hidden flex">
+              <div className="w-3/4 h-full bg-[#0f111a] border-r border-white/10 shadow-2xl">
+                <div className="p-4 flex justify-between items-center border-b border-white/5">
+                  <span className="text-white font-bold tracking-widest text-sm">ARCHIVES</span>
+                  <button onClick={() => setIsMobileMenuOpen(false)} className="text-white/50 hover:text-white">
+                    <Menu className="w-6 h-6 rotate-90" />
+                  </button>
+                </div>
+                <ChatHistoryPanel
+                  userId={userId}
+                  onSelectSession={handleSelectSession}
+                  currentSessionId={currentSessionId}
+                  triggerRefresh={refreshHistory}
+                />
+              </div>
+              <div className="flex-1" onClick={() => setIsMobileMenuOpen(false)}></div>
+            </div>
+          )}
+
           {/* MAIN CHAT (CENTER) */}
           <div className="flex-1 flex flex-col relative w-full min-w-0">
             {/* Header */}
-            <header className="h-20 border-b border-white/5 flex items-center px-8 justify-between bg-white/5">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                  <Sparkles className="w-5 h-5 text-blue-400" />
+            <header className="h-16 md:h-20 border-b border-white/5 flex items-center px-4 md:px-8 justify-between bg-white/5">
+              <div className="flex items-center gap-3 md:gap-4">
+                {/* Mobile Menu Button */}
+                <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-white/70 hover:text-white">
+                  <Menu className="w-6 h-6" />
+                </button>
+
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                  <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-white tracking-wide">KAI <span className="text-blue-400">assistant</span></h1>
-                  <p className="text-xs text-gray-400">Connected: <span className="text-white font-mono">{username}</span></p>
+                  <h1 className="text-lg md:text-xl font-bold text-white tracking-wide">KAI <span className="text-blue-400 hidden sm:inline">assistant</span></h1>
+                  <p className="text-[10px] md:text-xs text-gray-400">Connected: <span className="text-white font-mono">{username}</span></p>
                 </div>
               </div>
               <button onClick={handleLogout} className="text-white/50 hover:text-red-400 transition" title="Logout">
@@ -154,7 +184,7 @@ function App() {
             </header>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-6 py-8 space-y-2">
+            <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4 md:py-8 space-y-3 md:space-y-2">
               {messages.map((msg, i) => (
                 <MessageBubble key={i} role={msg.role} content={msg.content} />
               ))}
@@ -168,21 +198,21 @@ function App() {
             </div>
 
             {/* Input */}
-            <div className="p-6 bg-gradient-to-t from-black/40 to-transparent">
+            <div className="p-4 md:p-6 bg-gradient-to-t from-black/40 to-transparent">
               <form onSubmit={handleSend} className="relative">
                 <input
                   type="text"
                   value={input}
                   onChange={e => setInput(e.target.value)}
-                  placeholder="Type your message..."
-                  className="w-full bg-white/10 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:bg-white/15 focus:border-blue-500/50 transition-all shadow-lg backdrop-blur-md"
+                  placeholder="Type message..."
+                  className="w-full bg-white/10 border border-white/10 rounded-2xl px-4 md:px-6 py-3 md:py-4 text-white text-sm md:text-base placeholder-gray-400 focus:outline-none focus:bg-white/15 focus:border-blue-500/50 transition-all shadow-lg backdrop-blur-md"
                 />
                 <button
                   type="submit"
                   disabled={!input || loading}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-blue-500 hover:bg-blue-400 text-white rounded-xl transition-all shadow-lg shadow-blue-500/20 disabled:opacity-50 disabled:shadow-none"
+                  className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 p-2 bg-blue-500 hover:bg-blue-400 text-white rounded-xl transition-all shadow-lg shadow-blue-500/20 disabled:opacity-50 disabled:shadow-none"
                 >
-                  <Send className="w-5 h-5" />
+                  <Send className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
               </form>
             </div>
