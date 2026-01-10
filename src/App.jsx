@@ -1,6 +1,7 @@
+```javascript
 import React, { useState, useEffect, useRef } from 'react';
 import api from './api';
-import { Send, Sparkles, LogOut, Menu } from 'lucide-react';
+import { Send, Sparkles, LogOut, Menu, Brain, X } from 'lucide-react';
 import { MessageBubble } from './components/MessageBubble';
 import { MemoryPanel } from './components/MemoryPanel';
 import { LoginPage } from './components/LoginPage';
@@ -21,12 +22,13 @@ function App() {
 
   // Mobile State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMemoryOpen, setIsMemoryOpen] = useState(false);
 
   useEffect(() => {
     if (userId) {
       // Initial load? Maybe select latest session or start new?
       // Let's default to New Chat (empty)
-      setMessages([{ role: 'model', content: `Welcome back, ${username}. System initialized.` }]);
+      setMessages([{ role: 'model', content: `Welcome back, ${ username }. System initialized.` }]);
     }
   }, [userId]);
 
@@ -55,13 +57,13 @@ function App() {
     setIsMobileMenuOpen(false); // Close mobile drawer on selection
     if (!sessionId) {
       // New Chat
-      setMessages([{ role: 'model', content: `Ready for a new task, ${username}.` }]);
+      setMessages([{ role: 'model', content: `Ready for a new task, ${ username }.` }]);
       return;
     }
 
     setLoading(true);
     try {
-      const res = await api.get(`/api/chat/session/${sessionId}`);
+      const res = await api.get(`/ api / chat / session / ${ sessionId } `);
       if (res.data) {
         setMessages(res.data.map(m => ({ content: m.content, role: m.role })));
       }
@@ -139,24 +141,44 @@ function App() {
             />
           </div>
 
-          {/* HISTORY SIDEBAR (MOBILE OVERLAY) */}
+          {/* HISTORY SIDEBAR (MOBILE OVERLAY - LEFT) */}
           {isMobileMenuOpen && (
             <div className="absolute inset-0 z-50 bg-black/80 backdrop-blur-md md:hidden flex">
-              <div className="w-3/4 h-full bg-[#0f111a] border-r border-white/10 shadow-2xl">
-                <div className="p-4 flex justify-between items-center border-b border-white/5">
-                  <span className="text-white font-bold tracking-widest text-sm">ARCHIVES</span>
-                  <button onClick={() => setIsMobileMenuOpen(false)} className="text-white/50 hover:text-white">
-                    <Menu className="w-6 h-6 rotate-90" />
-                  </button>
-                </div>
-                <ChatHistoryPanel
-                  userId={userId}
-                  onSelectSession={handleSelectSession}
-                  currentSessionId={currentSessionId}
-                  triggerRefresh={refreshHistory}
-                />
-              </div>
-              <div className="flex-1" onClick={() => setIsMobileMenuOpen(false)}></div>
+               <div className="w-3/4 h-full bg-[#0f111a] border-r border-white/10 shadow-2xl flex flex-col">
+                  <div className="p-4 flex justify-between items-center border-b border-white/5 shrink-0">
+                      <span className="text-white font-bold tracking-widest text-sm">ARCHIVES</span>
+                      <button onClick={() => setIsMobileMenuOpen(false)} className="text-white/50 hover:text-white">
+                        <X className="w-6 h-6" />
+                      </button>
+                  </div>
+                  <div className="flex-1 overflow-hidden">
+                    <ChatHistoryPanel
+                        userId={userId}
+                        onSelectSession={handleSelectSession}
+                        currentSessionId={currentSessionId}
+                        triggerRefresh={refreshHistory}
+                    />
+                  </div>
+               </div>
+               <div className="flex-1" onClick={() => setIsMobileMenuOpen(false)}></div>
+            </div>
+          )}
+
+          {/* MEMORY SIDEBAR (MOBILE OVERLAY - RIGHT) */}
+          {isMemoryOpen && (
+            <div className="absolute inset-0 z-50 bg-black/80 backdrop-blur-md md:hidden flex justify-end">
+               <div className="flex-1" onClick={() => setIsMemoryOpen(false)}></div>
+               <div className="w-3/4 h-full bg-[#0f111a] border-l border-white/10 shadow-2xl flex flex-col">
+                  <div className="p-4 flex justify-between items-center border-b border-white/5 shrink-0">
+                      <button onClick={() => setIsMemoryOpen(false)} className="text-white/50 hover:text-white">
+                        <X className="w-6 h-6" />
+                      </button>
+                      <span className="text-white font-bold tracking-widest text-sm text-right">NEURAL CORE</span>
+                  </div>
+                  <div className="flex-1 overflow-hidden p-2">
+                    <MemoryPanel userId={userId} refreshTrigger={refreshMemory} />
+                  </div>
+               </div>
             </div>
           )}
 
@@ -167,7 +189,7 @@ function App() {
               <div className="flex items-center gap-3 md:gap-4">
                 {/* Mobile Menu Button */}
                 <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-white/70 hover:text-white">
-                  <Menu className="w-6 h-6" />
+                    <Menu className="w-6 h-6" />
                 </button>
 
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
@@ -178,9 +200,17 @@ function App() {
                   <p className="text-[10px] md:text-xs text-gray-400">Connected: <span className="text-white font-mono">{username}</span></p>
                 </div>
               </div>
-              <button onClick={handleLogout} className="text-white/50 hover:text-red-400 transition" title="Logout">
-                <LogOut className="w-5 h-5" />
-              </button>
+
+              <div className="flex items-center gap-4">
+                {/* Mobile Memory Button */}
+                <button onClick={() => setIsMemoryOpen(true)} className="md:hidden text-white/70 hover:text-blue-400 transition">
+                  <Brain className="w-6 h-6" />
+                </button>
+
+                <button onClick={handleLogout} className="text-white/50 hover:text-red-400 transition" title="Logout">
+                  <LogOut className="w-5 h-5" />
+                </button>
+              </div>
             </header>
 
             {/* Messages */}
@@ -218,7 +248,7 @@ function App() {
             </div>
           </div>
 
-          {/* MEMORY SIDEBAR (RIGHT) */}
+          {/* MEMORY SIDEBAR (DESKTOP - RIGHT) */}
           <div className="hidden lg:block w-80 border-l border-white/5 bg-white/5">
             <MemoryPanel userId={userId} refreshTrigger={refreshMemory} />
           </div>
