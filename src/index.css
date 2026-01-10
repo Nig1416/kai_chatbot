@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #000;
+  background: radial-gradient(circle at center, #0f172a 0%, #000000 100%);
   color: #fff;
   font-family: 'Inter', sans-serif;
   overflow: hidden;

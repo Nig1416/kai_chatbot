@@ -124,8 +124,8 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen w-full bg-tech-bg bg-cover bg-center overflow-hidden relative">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none"></div>
+    <div className="flex h-screen w-full bg-tech-bg bg-cover bg-center overflow-hidden relative" style={{ backgroundColor: '#0f172a' }}>
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm pointer-events-none"></div>
 
       {/* Floating Glass Container */}
       <div className="relative z-10 w-full h-full flex items-center justify-center md:p-8">
