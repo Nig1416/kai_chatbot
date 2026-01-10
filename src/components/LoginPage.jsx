@@ -19,7 +19,7 @@ export function LoginPage({ onLogin }) {
         const endpoint = isSignup ? '/api/chat/signup' : '/api/chat/login';
 
         try {
-            const res = await api.post(`/api/chat${endpoint}`, { username, password });
+            const res = await api.post(endpoint, { username, password });
             if (res.data && res.data.userId) {
                 onLogin(res.data.userId, res.data.username);
             }
