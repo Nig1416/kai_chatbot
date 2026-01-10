@@ -1,0 +1,281 @@
+{
+  "users": [
+    {
+      "userId": "user_d8ecl8b20",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T08:10:17.427Z"
+    },
+    {
+      "userId": "user_fcp63shjk",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T08:13:52.741Z"
+    },
+    {
+      "userId": "user_sux9jra8s",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T08:23:04.383Z"
+    },
+    {
+      "userId": "user_c1d9h3j6b",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T08:31:31.088Z"
+    },
+    {
+      "userId": "user_fwx4pumn6",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T12:57:11.127Z"
+    },
+    {
+      "userId": "user_rq56yus1p",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T13:13:58.076Z"
+    },
+    {
+      "userId": "user_5rrawp2a7",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T13:27:40.985Z"
+    },
+    {
+      "userId": "user_g1xb3cyds",
+      "username": "nig",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T13:32:15.193Z"
+    },
+    {
+      "userId": "user_h78lsb0w8",
+      "username": "kalu",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T13:32:38.809Z"
+    },
+    {
+      "userId": "user_ndjdm658v",
+      "username": "hmi",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T13:37:40.009Z"
+    },
+    {
+      "userId": "user_g7zb2a635",
+      "username": "bomd",
+      "password": "1234",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T14:04:13.162Z"
+    },
+    {
+      "userId": "user_rl90r3len",
+      "username": "bomb",
+      "password": "12345",
+      "facts": [],
+      "preferences": {},
+      "createdAt": "2026-01-10T14:05:11.405Z"
+    }
+  ],
+  "sessions": [
+    {
+      "userId": "user_d8ecl8b20",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hello"
+        },
+        {
+          "role": "model",
+          "content": "Sorry, I'm having a bit of a brain freeze. Give me a sec."
+        },
+        {
+          "role": "user",
+          "content": "hey"
+        },
+        {
+          "role": "model",
+          "content": "Sorry, I'm having a bit of a brain freeze. Give me a sec."
+        }
+      ],
+      "lastActive": "2026-01-10T08:12:02.403Z"
+    },
+    {
+      "userId": "user_fcp63shjk",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hello"
+        },
+        {
+          "role": "model",
+          "content": "Sorry, I'm having a bit of a brain freeze. Give me a sec."
+        },
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "model",
+          "content": "Sorry, I'm having a bit of a brain freeze. Give me a sec."
+        }
+      ],
+      "lastActive": "2026-01-10T08:19:44.155Z"
+    },
+    {
+      "userId": "user_sux9jra8s",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hello"
+        },
+        {
+          "role": "model",
+          "content": "Hey there! What's up?"
+        }
+      ],
+      "lastActive": "2026-01-10T08:23:51.411Z"
+    },
+    {
+      "userId": "user_c1d9h3j6b",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hello"
+        },
+        {
+          "role": "model",
+          "content": "Hey there! What's up?"
+        }
+      ],
+      "lastActive": "2026-01-10T08:38:41.831Z"
+    },
+    {
+      "userId": "user_fwx4pumn6",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "model",
+          "content": "Hey there!"
+        }
+      ],
+      "lastActive": "2026-01-10T12:57:14.876Z"
+    },
+    {
+      "userId": "user_rq56yus1p",
+      "messages": [
+        {
+          "role": "user",
+          "content": "i love shushi"
+        },
+        {
+          "role": "model",
+          "content": "Excellent taste! Sushi is truly a work of art.\n\nDo you have a go-to roll, or are you more of an adventurous omakase type?"
+        },
+        {
+          "role": "user",
+          "content": "yes"
+        },
+        {
+          "role": "model",
+          "content": "Haha, a classic \"yes\" to a multiple-choice question! I like your style – keeping me on my toes.\n\nSo, are we talking about a beloved, never-fail signature roll, or the thrill of letting the chef surprise you with their genius? Or perhaps... both? 😉"
+        }
+      ],
+      "lastActive": "2026-01-10T13:14:18.708Z"
+    },
+    {
+      "userId": "user_5rrawp2a7",
+      "messages": [
+        {
+          "role": "user",
+          "content": "my name is nigam i am codeer in js"
+        },
+        {
+          "role": "model",
+          "content": "Nigam, great to meet you! A JS coder, very cool. So you're fluent in the language of the web, then? What kind of digital wonders do you usually build?"
+        }
+      ],
+      "lastActive": "2026-01-10T13:27:46.828Z"
+    },
+    {
+      "userId": "user_h78lsb0w8",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "model",
+          "content": "Hey there! What's buzzing in your world today?"
+        }
+      ],
+      "lastActive": "2026-01-10T13:32:46.079Z"
+    },
+    {
+      "userId": "user_g1xb3cyds",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "model",
+          "content": "Hey there! What's on your mind today?"
+        }
+      ],
+      "lastActive": "2026-01-10T13:33:04.043Z"
+    },
+    {
+      "userId": "user_ndjdm658v",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "model",
+          "content": "Hey there! What's up?"
+        }
+      ],
+      "lastActive": "2026-01-10T13:37:48.016Z"
+    },
+    {
+      "sessionId": "sess_b92hllj4s",
+      "userId": "user_h78lsb0w8",
+      "title": "hi",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "model",
+          "content": "Hey kalu! What's cooking? Or, you know, just what's up? 😉"
+        }
+      ],
+      "lastActive": "2026-01-10T13:54:04.586Z"
+    },
+    {
+      "sessionId": "sess_blsfzwg8x",
+      "userId": "user_g1xb3cyds",
+      "title": "i like coding",
+      "messages": [
+        {
+          "role": "user",
+          "content": "i like coding"
+        },
+        {
+          "role": "model",
+          "content": "Oh, nice! That's a pretty cool skill to have, nig. Getting to build things from scratch, solve puzzles... what kind of coding gets you most excited these days?"
+        }
+      ],
+      "lastActive": "2026-01-10T13:55:26.208Z"
+    }
+  ]
+}
